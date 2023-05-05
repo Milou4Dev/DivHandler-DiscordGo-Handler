@@ -3,7 +3,7 @@ package main
 import (
     "log"
 
-    "code/commands"
+    "Code/commands"
     "github.com/bwmarrin/discordgo"
 )
 
