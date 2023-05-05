@@ -3,7 +3,7 @@ package main
 import (
     "log"
 
-    "Divbot/commands"
+    "code/commands"
     "github.com/bwmarrin/discordgo"
 )
 
