@@ -13,9 +13,7 @@ func RegisterSlashCommands(session *discordgo.Session) {
 		return
 	}
 
-	appCommands := []*discordgo.ApplicationCommand{
-		commands.PongCommand(),
-	}
+	appCommands := commands.GetApplicationCommands()
 
 	for _, cmd := range appCommands {
 		if _, err := session.ApplicationCommandCreate(session.State.User.ID, "", cmd); err != nil {
@@ -38,4 +36,12 @@ func InteractionHandler(session *discordgo.Session, interaction *discordgo.Inter
 	} else {
 		log.Printf("Unknown command: %s", commandName)
 	}
+}
+
+func ReadyHandler(s *discordgo.Session, r *discordgo.Ready) {
+	log.Println("Bot is now ready.")
+	if err := s.UpdateStatusComplex(discordgo.UpdateStatusData{Status: "idle"}); err != nil {
+		log.Printf("Error setting bot status: %v", err)
+	}
+	RegisterSlashCommands(s)
 }
