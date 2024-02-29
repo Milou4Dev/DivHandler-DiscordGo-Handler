@@ -1,20 +1,21 @@
 package commands
 
 import (
-	"github.com/bwmarrin/discordgo"
+    "github.com/bwmarrin/discordgo"
+    "mpb/utils"
 )
 
 func init() {
-	CommandHandlers["whoismydev"] = handleWhoIsMyDevCommand
+    CommandHandlers["whoismydev"] = handleWhoIsMyDevCommand
 }
 
 func WhoIsMyDevCommand() *discordgo.ApplicationCommand {
-	return &discordgo.ApplicationCommand{
-		Name:        "whoismydev",
-		Description: "Reveals who the developer is.",
-	}
+    return &discordgo.ApplicationCommand{
+        Name:        "whoismydev",
+        Description: "Reveals who the developer is.",
+    }
 }
 
 func handleWhoIsMyDevCommand(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	RespondWithMessage(s, i, "My dev is Milou4Dev.", discordgo.MessageFlagsEphemeral)
+    utils.RespondWithMessage(s, i, "My dev is Milou4Dev.", discordgo.MessageFlagsEphemeral)
 }
