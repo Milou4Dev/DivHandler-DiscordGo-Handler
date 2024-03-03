@@ -1,9 +1,9 @@
 package modules
 
 import (
-    "log"
-    "github.com/bwmarrin/discordgo"
     "code/commands"
+    "github.com/bwmarrin/discordgo"
+    "log"
 )
 
 func RegisterSlashCommands(session *discordgo.Session) {

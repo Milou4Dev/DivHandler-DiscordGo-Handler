@@ -1,8 +1,8 @@
 package commands
 
 import (
-    "github.com/bwmarrin/discordgo"
     "code/utils"
+    "github.com/bwmarrin/discordgo"
 )
 
 func init() {
