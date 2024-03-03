@@ -2,7 +2,7 @@ package commands
 
 import (
     "github.com/bwmarrin/discordgo"
-    "mpb/utils"
+    "code/utils"
 )
 
 func init() {

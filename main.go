@@ -7,7 +7,7 @@ import (
     "os/signal"
     "syscall"
     "github.com/joho/godotenv"
-    "mpb/modules"
+    "code/modules"
     "github.com/bwmarrin/discordgo"
 )
 

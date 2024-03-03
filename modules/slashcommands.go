@@ -3,7 +3,7 @@ package modules
 import (
     "log"
     "github.com/bwmarrin/discordgo"
-    "mpb/commands"
+    "code/commands"
 )
 
 func RegisterSlashCommands(session *discordgo.Session) {

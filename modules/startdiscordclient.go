@@ -4,7 +4,7 @@ import (
     "fmt"
     "log"
     "github.com/bwmarrin/discordgo"
-    "mpb/events"
+    "code/events"
 )
 
 func StartDiscordClient(token string) *discordgo.Session {
