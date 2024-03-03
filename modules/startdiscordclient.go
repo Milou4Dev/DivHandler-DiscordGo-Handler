@@ -2,26 +2,30 @@ package modules
 
 import (
 	"code/events"
-	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"log"
+	"os"
+	"os/signal"
+	"syscall"
 )
 
-func StartDiscordClient(token string) *discordgo.Session {
+func StartDiscordClient(token string) (*discordgo.Session, error) {
 	session, err := discordgo.New("Bot " + token)
 	if err != nil {
-		log.Fatalf("Error creating Discord session: %v", err)
+		return nil, err
 	}
 	session.AddHandlerOnce(events.ReadyHandler)
 	session.AddHandler(InteractionHandler)
 	if err := session.Open(); err != nil {
-		log.Fatalf("Error opening connection: %v", err)
+		return nil, err
 	}
-	if session.State.User != nil {
-		RegisterSlashCommands(session)
-	} else {
-		log.Println("Session user is nil, cannot register commands.")
-	}
-	fmt.Println("Bot is now running. Press Ctrl+C to exit.")
-	return session
+	RegisterSlashCommands(session)
+	log.Println("Bot is now running. Press Ctrl+C to exit.")
+	return session, nil
+}
+
+func WaitForInterrupt() {
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+	<-stop
 }
