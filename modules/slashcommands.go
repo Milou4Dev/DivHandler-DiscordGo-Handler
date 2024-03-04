@@ -8,8 +8,7 @@ import (
 
 func RegisterSlashCommands(session *discordgo.Session) {
 	for _, cmd := range commands.GetApplicationCommands() {
-		_, err := session.ApplicationCommandCreate(session.State.User.ID, "", cmd)
-		if err != nil {
+		if _, err := session.ApplicationCommandCreate(session.State.User.ID, "", cmd); err != nil {
 			log.Printf("Error creating global application command %s: %v", cmd.Name, err)
 		} else {
 			log.Printf("Registered global slash command: %s", cmd.Name)

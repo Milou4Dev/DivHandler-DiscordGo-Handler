@@ -16,20 +16,17 @@ func PingCommand() *discordgo.ApplicationCommand {
 
 func handlePingCommand(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	startTime := time.Now()
-	err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+	if err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
 		Data: &discordgo.InteractionResponseData{Content: "Calculating ping...", Flags: discordgo.MessageFlagsEphemeral},
-	})
-	if err != nil {
+	}); err != nil {
 		fmt.Printf("Error sending interaction response: %v\n", err)
 		return
 	}
 	delay := time.Since(startTime).Milliseconds()
 	apiLatency := s.HeartbeatLatency().Milliseconds()
 	content := fmt.Sprintf("API Latency: %d ms\nLatency (Processing time): %d ms", apiLatency, delay)
-	_, err = s.InteractionResponseEdit(i.Interaction, &discordgo.WebhookEdit{Content: &content})
-	if err != nil {
+	if _, err := s.InteractionResponseEdit(i.Interaction, &discordgo.WebhookEdit{Content: &content}); err != nil {
 		fmt.Printf("Error editing interaction response: %v\n", err)
-		return
 	}
 }

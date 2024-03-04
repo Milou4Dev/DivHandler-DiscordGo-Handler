@@ -7,8 +7,7 @@ import (
 
 func ReadyHandler(s *discordgo.Session, r *discordgo.Ready) {
 	log.Println("Bot is now ready.")
-	err := s.UpdateStatusComplex(discordgo.UpdateStatusData{Status: "idle"})
-	if err != nil {
+	if err := s.UpdateStatusComplex(discordgo.UpdateStatusData{Status: "idle"}); err != nil {
 		log.Printf("Error setting bot status: %v", err)
 	}
 }
